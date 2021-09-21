@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame{
@@ -14,6 +16,12 @@ public class GUI extends JFrame{
 	private JLabel[][] labelsTetris; //Mantiene una matriz de los labels que van a estar cambiando constantemente en el juego. Tiene 21 filas y 10 columnas.
 	
 	public GUI() {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(450, 591));
 		setResizable(false);
@@ -55,5 +63,10 @@ public class GUI extends JFrame{
 	}
 	public void setJuego(Juego j) {
 		juego = j;
+	}
+	public void actualizarBloque(Bloque bloque, String imagen) {
+		for(int i = 0; i<4; i++) {
+			
+		}
 	}
 }

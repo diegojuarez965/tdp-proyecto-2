@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 
 public class Juego {
 
@@ -34,7 +35,9 @@ public class Juego {
 	
 	public void aumentarVelocidad() {} 
 	
-	public void aumentarTiempo() {}  
+	public void aumentarTiempo(long tiempo) {
+		miGui.actualizarTiempo(LocalTime.MIN.plusSeconds(tiempo).toString());
+	}  
 	
 	public Tetrimino obtenerTetriminoActivo() {
 		

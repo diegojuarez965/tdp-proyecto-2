@@ -3,9 +3,14 @@ public class Launcher {
 
 	public static void main(String[] args) {
 		GUI gui = new GUI();
-		gui.setVisible(true);
-		Juego juego = new Juego(); //new Juego(gui);
+		
+		Reloj reloj = new Reloj();
+		Juego juego = new Juego(gui,reloj);
 		gui.setJuego(juego);
+		reloj.setJuego(juego);
+		gui.setVisible(true);
+		reloj.run();
+		
 	}
 
 }
