@@ -27,9 +27,9 @@ public class GUI extends JFrame{
 		setResizable(false);
 		getContentPane().setLayout(new MigLayout("insets 0, wrap 23", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[][][][][]", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0"));
 		
-		tiempo = new JLabel("00:00");
+		tiempo = new JLabel("00:00:00");
 		getContentPane().add(tiempo, "cell 16 6");
-		puntos = new JLabel(0+" puntos");
+		puntos = new JLabel("Puntos: "+0);
 		getContentPane().add(puntos, "cell 16 8");
 		
 		labelsTetris = new JLabel[21][10];
@@ -59,14 +59,18 @@ public class GUI extends JFrame{
 		tiempo.setText(t);
 	}
 	public void actualizarPuntos(int p) {
-		puntos.setText(p+" puntos");
+		puntos.setText("Puntos: "+p);
 	}
 	public void setJuego(Juego j) {
 		juego = j;
 	}
-	public void actualizarBloque(Bloque bloque, String imagen) {
-		for(int i = 0; i<4; i++) {
-			
-		}
+	public void actualizarBloque(int x, int y, String imagen) {
+		labelsTetris[x][y].setIcon(new ImageIcon(GUI.class.getResource(imagen)));
+	}
+	public int obtenerPuntos() {
+		return Integer.parseInt(puntos.getText().substring(8));
+	}
+	public String obtenerTiempo() {
+		return tiempo.getText();
 	}
 }
