@@ -22,6 +22,7 @@ public class Juego {
 				grilla[i][j] = new Bloque(i,j);
 		
 		tetriminoActivo = randomTetrimino();
+		tetriminoActivo.ocuparBloques();
 		tetriminoSig = randomTetrimino();
 	}
 	

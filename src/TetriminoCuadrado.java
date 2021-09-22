@@ -9,7 +9,6 @@ public class TetriminoCuadrado extends Tetrimino {
 		bloques[1]= grilla[0][5];
 		bloques[2]= grilla[1][4];
 		bloques[3]= grilla[1][5];
-		ocuparBloques();
 	}
 
 	public Bloque[] moverTetriminoIzq() {

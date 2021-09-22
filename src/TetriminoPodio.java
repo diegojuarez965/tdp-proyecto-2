@@ -9,7 +9,6 @@ public class TetriminoPodio extends Tetrimino {
 		bloques[1]= grilla[1][5];
 		bloques[2]= grilla[1][6];
 		bloques[3]= grilla[0][5];
-		ocuparBloques();
 	}
 
 	public Bloque[] moverTetriminoIzq() {
