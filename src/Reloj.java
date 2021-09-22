@@ -25,7 +25,7 @@ public class Reloj implements Runnable{
 			tiempoNuevo = System.currentTimeMillis();
 			tiempoTranscurrido = tiempoNuevo-tiempoViejo;
 			juego.aumentarTiempo(tiempoTranscurrido/1000);
-			if((tiempoTranscurrido/1000)%10==0) //Se aumenta la velocidad cada 10s
+			if((tiempoTranscurrido/1000)%20==0) //Se aumenta la velocidad cada 20s
 				juego.aumentarVelocidad();
 		}
 	}

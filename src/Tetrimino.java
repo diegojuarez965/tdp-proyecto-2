@@ -24,7 +24,11 @@ public abstract class Tetrimino {
 	public int obtenerOrientacion() {
 		return orientacion;
 	}
-
+	
+	public Bloque[] obtenerBloques() {
+		return bloques;
+	}
+	
 	public boolean posDisponible(int x,int y) {
 		boolean disponible=true;
 		if(x>20 || x<0  || y>9 || y<0 || !grilla[x][y].obtenerDisponible())

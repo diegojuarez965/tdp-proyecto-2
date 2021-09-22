@@ -15,13 +15,26 @@ public class GUI extends JFrame{
 	private JLabel tiempo;
 	private JLabel puntos;
 	private JLabel[][] labelsTetris; //Mantiene una matriz de los labels que van a estar cambiando constantemente en el juego. Tiene 21 filas y 10 columnas.
-	private Teclado teclado;
 	
 	public GUI() {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				switch(e.getKeyCode()) {
 				
+				case KeyEvent.VK_RIGHT: {
+					juego.moverTetriminoDer();
+					break;
+				} 
+				case KeyEvent.VK_LEFT: {
+					juego.moverTetriminoIzq();
+					break;
+				}
+				case KeyEvent.VK_SPACE:{
+					juego.rotarTetrimino();
+					break;
+				}
+			}
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,9 +69,6 @@ public class GUI extends JFrame{
 						labelsTetris[j-1][i-1] = labelTemp;
 					}
 		}
-		
-		teclado = new Teclado();
-		this.addKeyListener(teclado);
 	}
 	
 	public void actualizarTiempo(String t) {
@@ -69,7 +79,6 @@ public class GUI extends JFrame{
 	}
 	public void setJuego(Juego j) {
 		juego = j;
-		teclado.setJuego(j);
 	}
 	public void actualizarBloque(int x, int y, String imagen) {
 		labelsTetris[x][y].setIcon(new ImageIcon(GUI.class.getResource(imagen)));
@@ -79,47 +88,5 @@ public class GUI extends JFrame{
 	}
 	public String obtenerTiempo() {
 		return tiempo.getText();
-	}
-	
-	private class Teclado implements KeyListener{
-
-		private Juego juego;
-		
-		@Override
-		public void keyTyped(KeyEvent e) {
-
-			switch(e.getKeyCode()) {
-			
-				case KeyEvent.VK_RIGHT: {
-					juego.moverTetriminoDer();
-					break;
-				} 
-				case KeyEvent.VK_LEFT: {
-					juego.moverTetriminoIzq();
-					break;
-				}
-				case KeyEvent.VK_SPACE:{
-					juego.rotarTetrimino();
-					break;
-				}
-			}
-		}
-		
-		public void setJuego(Juego j) {
-			juego = j;
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
 	}
 }
