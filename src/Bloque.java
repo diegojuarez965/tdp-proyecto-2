@@ -1,14 +1,14 @@
 
 public class Bloque {
 
-	protected String color;
+	protected boolean disponible;
 	protected int posEnGrillaX, posEnGrillaY;
 
 	public Bloque(int posEnGrillaX, int posEnGrillaY) {
 
 		this.posEnGrillaX = posEnGrillaX;
 		this.posEnGrillaY = posEnGrillaY;
-		color= "/images/FondoNegro.png";
+		disponible=true;
 	}
 
 	public int obtenerPosEnGrillaX() {
@@ -19,11 +19,11 @@ public class Bloque {
 		return posEnGrillaY;
 	}
 
-	public String obtenerColor() {
-		return color;
+	public boolean obtenerDisponible() {
+		return disponible;
 	}
 
-	public void actualizarColor(String i) {
-		this.color = i;
+	public void actualizarDisponible(boolean disp) {
+		disponible = disp;
 	}
 }

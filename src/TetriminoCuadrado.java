@@ -9,13 +9,10 @@ public class TetriminoCuadrado extends Tetrimino {
 		bloques[1]= grilla[0][5];
 		bloques[2]= grilla[1][4];
 		bloques[3]= grilla[1][5];
-		bloques[0].actualizarColor(color);
-		bloques[1].actualizarColor(color);
-		bloques[2].actualizarColor(color);
-		bloques[3].actualizarColor(color);
+		ocuparBloques();
 	}
 
-	public Bloque[] rotar(){
+	public Bloque[] rotarTetrimino(){
 		return bloques;
 	}
 
