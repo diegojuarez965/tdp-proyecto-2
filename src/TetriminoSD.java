@@ -22,25 +22,29 @@ public class TetriminoSD extends Tetrimino {
 		y1= bloques[1].obtenerPosEnGrillaY();
 		y2= bloques[2].obtenerPosEnGrillaY();
 		y3= bloques[3].obtenerPosEnGrillaY();
-		vaciarBloques();
 		switch(orientacion) {
 		case 0:{
 			if(!posDisponible(x0,y0-1) || !posDisponible(x2,y2-1))
 				return null;
+			break;
 		}
 		case 90:{
 			if(!posDisponible(x0,y0-1) || !posDisponible(x1,y1-1) || !posDisponible(x3,y3-1))
 				return null;
+			break;
 		}
 		case 180:{
 			if(!posDisponible(x1,y1-1) || !posDisponible(x3,y3-1))
 				return null;	
+			break;
 		}
 		case 270:{
 			if(!posDisponible(x0,y0-1) || !posDisponible(x2,y2-1) || !posDisponible(x3,y3-1))
 				return null;
+			break;
 		}
 		}
+		vaciarBloques();
 		bloques[0]= grilla[x0][y0-1];
 		bloques[1]= grilla[x1][y1-1];
 		bloques[2]= grilla[x2][y2-1];
@@ -59,25 +63,29 @@ public class TetriminoSD extends Tetrimino {
 		y1= bloques[1].obtenerPosEnGrillaY();
 		y2= bloques[2].obtenerPosEnGrillaY();
 		y3= bloques[3].obtenerPosEnGrillaY();
-		vaciarBloques();
 		switch(orientacion) {
 		case 0:{
 			if(!posDisponible(x1,y1+1) || !posDisponible(x3,y3+1))
 				return null;
+			break;
 		}
 		case 90:{
 			if(!posDisponible(x0,y0+1) || !posDisponible(x2,y2+1) || !posDisponible(x3,y3+1))
 				return null;
+			break;
 		}
 		case 180:{
 			if(!posDisponible(x0,y0+1) || !posDisponible(x2,y2+1))
 				return null;	
+			break;
 		}
 		case 270:{
 			if(!posDisponible(x0,y0+1) || !posDisponible(x1,y1+1) || !posDisponible(x3,y3+1))
 				return null;
+			break;
 		}
 		}
+		vaciarBloques();
 		bloques[0]= grilla[x0][y0+1];
 		bloques[1]= grilla[x1][y1+1];
 		bloques[2]= grilla[x2][y2+1];
