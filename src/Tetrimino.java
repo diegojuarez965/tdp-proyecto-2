@@ -27,7 +27,7 @@ public abstract class Tetrimino {
 
 	public boolean posDisponible(int x,int y) {
 		boolean disponible=true;
-		if(x>9 || y>20 || !grilla[x][y].obtenerDisponible())
+		if(x>20 || x<0  || y>9 || y<0 || !grilla[x][y].obtenerDisponible())
 			disponible=false;
 		return disponible;
 	}
