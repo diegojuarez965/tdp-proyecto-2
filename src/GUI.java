@@ -14,9 +14,11 @@ public class GUI extends JFrame{
 	private Juego juego;
 	private JLabel tiempo;
 	private JLabel puntos;
+	private JLabel proxTetrimino;
 	private JLabel[][] labelsTetris; //Mantiene una matriz de los labels que van a estar cambiando constantemente en el juego. Tiene 21 filas y 10 columnas.
 	
-	public GUI() {
+	public GUI(Juego juego) {
+		this.juego = juego;
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -40,7 +42,13 @@ public class GUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(450, 591));
 		setResizable(false);
-		getContentPane().setLayout(new MigLayout("insets 0, wrap 23", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[][][][][]", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0"));
+		getContentPane().setLayout(new MigLayout("insets 0", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[][][][]0[]0", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0"));
+		
+		
+		proxTetrimino = new JLabel("");
+		proxTetrimino.setIcon(new ImageIcon(GUI.class.getResource(juego.obtenerTetriminoSig().obtenerIcono())));
+		getContentPane().add(proxTetrimino, "cell 16 2, span 2 2");
+		getContentPane().add(new JLabel("Proximo Tetrimino:"),"cell 16 1");
 		
 		tiempo = new JLabel("00:00:00");
 		getContentPane().add(tiempo, "cell 16 6");
