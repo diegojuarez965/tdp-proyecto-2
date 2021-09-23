@@ -84,6 +84,11 @@ public class Juego {
 			for(int i = 0; i<4; i++)
 				miGui.actualizarBloque(bloquesNuevos[i].obtenerPosEnGrillaX(), bloquesNuevos[i].obtenerPosEnGrillaY(), tetriminoActivo.obtenerColor());
 		}
+		else {
+			tetriminoActivo = tetriminoSig;
+			tetriminoSig = randomTetrimino();
+			miGui.actualizarProxTetrimino(tetriminoSig.icono);
+		}
 	}
 	
 	private void moverTetriminoIzq() {

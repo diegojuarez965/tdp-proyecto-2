@@ -31,6 +31,10 @@ public class GUI extends JFrame{
 					juego.operar(juego.MOVER_IZQUIERDA);
 					break;
 				}
+				case KeyEvent.VK_DOWN:{
+					juego.operar(juego.MOVER_ABAJO);
+					break;
+				}
 				case KeyEvent.VK_SPACE:{
 					juego.operar(juego.ROTAR);
 					break;
