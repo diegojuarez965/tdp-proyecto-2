@@ -131,7 +131,7 @@ public class Juego {
 	private Tetrimino randomTetrimino() {
 		Tetrimino t = null;
 		Random random = new Random();
-		switch(random.nextInt(7)){
+		switch(random.nextInt(10)){
 			case 0: t = new TetriminoCuadrado(grilla); break;
 			case 1: t = new TetriminoCuadrado(grilla); break;
 			case 2: t = new TetriminoPodio(grilla); break;
@@ -139,6 +139,9 @@ public class Juego {
 			case 4: t = new TetriminoPodio(grilla); break;
 			case 5: t = new TetriminoSD(grilla); break;
 			case 6: t = new TetriminoSI(grilla); break;
+			case 7: t = new TetriminoLinea(grilla);break;
+			case 8: t = new TetriminoLI(grilla);break;
+			case 9: t = new TetriminoLD(grilla);break;
 		}
 		return t;
 	}
