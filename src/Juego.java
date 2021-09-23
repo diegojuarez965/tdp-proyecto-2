@@ -85,6 +85,8 @@ public class Juego {
 				miGui.actualizarBloque(bloquesNuevos[i].obtenerPosEnGrillaX(), bloquesNuevos[i].obtenerPosEnGrillaY(), tetriminoActivo.obtenerColor());
 		}
 		else {
+			chequearFinJuego();
+			eliminarFila();
 			tetriminoActivo = tetriminoSig;
 			tetriminoSig = randomTetrimino();
 			miGui.actualizarProxTetrimino(tetriminoSig.icono);
@@ -127,15 +129,60 @@ public class Juego {
 		}
 	}
 	
-	public boolean finCaidaTetrimino() {return false;} 
+
 	
-	public boolean hayFilaCompleta() {return false;} 
+	public void eliminarFila() {
+		int cont=0;
+		Bloque[] bloques=tetriminoActivo.obtenerBloques();
+		for (int i=0; i<4;i++) {
+			int f=bloques[i].obtenerPosEnGrillaX();
+			boolean filaCompleta=true;
+			int c=0;
+			while(filaCompleta && c<10) {
+				if(grilla[f][c].disponible) {
+					filaCompleta=false;
+				}
+				else {
+					c++;
+				}
+			}
+			if(filaCompleta) {
+				cont++;
+				reacomodarFila(f);
+			}
+		}
+		sumarPuntos(cont);
+	} 
 	
-	public void eliminarFila(int fila) {} 
 	
-	public void sumarPuntos(int filaComp) {} 
+	private void reacomodarFila(int fila) {
+		for (int filaArriba=fila-1; filaArriba>-1;filaArriba--,fila--) {
+			for (int c=0;c<10;c++) {
+				grilla[fila][c].actualizarDisponible(grilla[filaArriba][c].obtenerDisponible());
+			}
+		}
+	}
+	private int sumarPuntos(int filaComp) {
+		return filaComp*100;
+	} 
 	
-	public void finalizarJuego() {} 
+	
+	private void chequearFinJuego() {
+		int c=0;
+		boolean termino=false;
+		while(!termino && c<10) {
+			if(!grilla[0][c].obtenerDisponible()) {
+				termino=true;
+			}
+		}
+		if (termino) {
+			terminoElJuego=true;
+		}
+	}
+	
+	public boolean finalizarJuego() {
+		return terminoElJuego;
+	} 
 	
 	public void setGui(GUI g) {
 		miGui = g;
