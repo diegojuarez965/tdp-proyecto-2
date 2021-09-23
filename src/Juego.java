@@ -174,14 +174,15 @@ public class Juego {
 			if(!grilla[0][c].obtenerDisponible()) {
 				termino=true;
 			}
+			c++;
 		}
-		if (termino) {
-			terminoElJuego=true;
-		}
+		if(termino==true)
+			finalizarJuego();
 	}
 	
-	public boolean finalizarJuego() {
-		return terminoElJuego;
+	public void finalizarJuego() {
+		miReloj.parar();
+		miGui.finalizar();
 	} 
 	
 	public void setGui(GUI g) {

@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.KeyAdapter;
@@ -9,20 +10,20 @@ import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame{
-	
+
 	private Juego juego;
 	private JLabel tiempo;
 	private JLabel puntos;
 	private JLabel proxTetrimino;
 	private JLabel[][] labelsTetris; //Mantiene una matriz de los labels que van a estar cambiando constantemente en el juego. Tiene 21 filas y 10 columnas.
-	
+
 	public GUI(Juego juego) {
 		this.juego = juego;
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyCode()) {
-				
+
 				case KeyEvent.VK_RIGHT: {
 					juego.operar(juego.MOVER_DERECHA);
 					break;
@@ -39,25 +40,25 @@ public class GUI extends JFrame{
 					juego.operar(juego.ROTAR);
 					break;
 				}
-			}
+				}
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(450, 591));
 		setResizable(false);
 		getContentPane().setLayout(new MigLayout("insets 0", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[][][][]0[]0", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0"));
-		
-		
+
+
 		proxTetrimino = new JLabel("");
 		proxTetrimino.setIcon(new ImageIcon(GUI.class.getResource(this.juego.obtenerTetriminoSig().obtenerIcono())));
 		getContentPane().add(proxTetrimino, "cell 16 2, span 2 2");
 		getContentPane().add(new JLabel("Proximo Tetrimino:"),"cell 16 1");
-		
+
 		tiempo = new JLabel("00:00:00");
 		getContentPane().add(tiempo, "cell 16 6");
 		puntos = new JLabel("Puntos: "+0);
 		getContentPane().add(puntos, "cell 16 8");
-		
+
 		labelsTetris = new JLabel[21][10];
 		for(int i = 0; i<12; i++) {
 			if(i==0 || i==11)
@@ -101,5 +102,10 @@ public class GUI extends JFrame{
 	}
 	public String obtenerTiempo() {
 		return tiempo.getText();
+	}
+	public void finalizar() {
+		JOptionPane.showMessageDialog(this, "          JUEGO TERMINADO\nConseguiste "+juego.obtenerPuntos()+" puntos en "+tiempo.getText());
+		this.setVisible(false);
+		this.dispose();
 	}
 }
