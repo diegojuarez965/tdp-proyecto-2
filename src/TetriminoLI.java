@@ -18,14 +18,14 @@ public class TetriminoLI extends Tetrimino{
 		vaciarBloques();
 		switch(orientacion) {
 		case 0:{
-			if(!posDisponible(f+1,c+1) || !posDisponible(f-1,c)) {
+			if(!posDisponible(f,c-2) || !posDisponible(f-1,c-2)) {
 				ocuparBloques();
 				return null;
 			}
-			bloques[0]=grilla[f+1][c+1];
-			bloques[1]=grilla[f+1][c];
-			bloques[2]=grilla[f][c];
-			bloques[3]=grilla[f-1][c];
+			bloques[0]=grilla[f+1][c-1];
+			bloques[1]=grilla[f+1][c-2];
+			bloques[2]=grilla[f][c-2];
+			bloques[3]=grilla[f-1][c-2];
 			orientacion=90;
 			break;
 		}
@@ -44,7 +44,7 @@ public class TetriminoLI extends Tetrimino{
 		}
 		
 		case 180:{
-			if(!posDisponible(f,c+1) || !posDisponible(f+1,c+2)) {
+			if(!posDisponible(f,c+2) || !posDisponible(f+1,c+2)) {
 				ocuparBloques();
 				return null;
 			}

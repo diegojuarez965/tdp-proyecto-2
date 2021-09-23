@@ -17,23 +17,25 @@ public class TetriminoLinea extends Tetrimino{
 		int c=bloques[0].obtenerPosEnGrillaY();
 		vaciarBloques();
 		if(orientacion==90) {
-			if(!posDisponible(f,c+1) || !posDisponible(f,c+2) || !posDisponible(f,c+3)) {
+			if(!posDisponible(f-2,c-1) || !posDisponible(f-2,c+1) || !posDisponible(f-2,c+2)) {
 				ocuparBloques();
 				return null;
 			}
 			else {
-				bloques[1]=grilla[f][c+1];
-				bloques[2]=grilla[f][c+2];
-				bloques[3]=grilla[f][c+3];			}
+				bloques[0]=grilla[f-2][c-1];
+				bloques[1]=grilla[f-2][c];
+				bloques[2]=grilla[f-2][c+1];
+				bloques[3]=grilla[f-2][c+2];			}
 			orientacion=0;
 		}else {
-				if(!posDisponible(f+1,c) || !posDisponible(f+2,c) || !posDisponible(f+3,c)) {
+				if(!posDisponible(f-1,c+1) || !posDisponible(f+2,c+1) || !posDisponible(f+1,c+1)) {
 					return null;
 				}
 				else {
-					bloques[1]=grilla[f+1][c];
-					bloques[2]=grilla[f+2][c];
-					bloques[3]=grilla[f+3][c];
+					bloques[0]=grilla[f+2][c+1];
+					bloques[1]=grilla[f+1][c+1];
+					bloques[2]=grilla[f][c+1];
+					bloques[3]=grilla[f-1][c+1];
 				}
 				orientacion=90;
 		}
