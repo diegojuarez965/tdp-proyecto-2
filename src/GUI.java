@@ -77,7 +77,9 @@ public class GUI extends JFrame{
 					}
 		}
 	}
-	
+	public void actualizarProxTetrimino(String t) {
+		proxTetrimino.setIcon(new ImageIcon(GUI.class.getResource(t)));
+	}
 	public void actualizarTiempo(String t) {
 		tiempo.setText(t);
 	}
