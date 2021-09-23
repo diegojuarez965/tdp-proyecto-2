@@ -1,4 +1,107 @@
 
-public class TetriminoLinea {
+public class TetriminoLinea extends Tetrimino{
+	
+	public TetriminoLinea(Bloque grilla[][]) {
+		super(grilla);
+		icono= "/images/TetriminoLinea.png";
+		color= "/images/BloqueLinea.png";
+		bloques[0]= grilla[0][3];
+		bloques[1]= grilla[0][4];
+		bloques[2]= grilla[0][5];
+		bloques[3]= grilla[0][6];
+		ocuparBloques();
+	}
+
+	public Bloque[] rotarTetrimino() {
+		int f=bloques[0].obtenerPosEnGrillaX();
+		int c=bloques[0].obtenerPosEnGrillaY();
+		vaciarBloques();
+		if(orientacion==90) {
+			if(!posDisponible(f,c+1) || !posDisponible(f,c+2) || !posDisponible(f,c+3)) {
+				ocuparBloques();
+				return null;
+			}
+			else {
+				bloques[1]=grilla[f][c+1];
+				bloques[2]=grilla[f][c+2];
+				bloques[3]=grilla[f][c+3];			}
+			orientacion=0;
+		}else {
+				if(!posDisponible(f+1,c) || !posDisponible(f+2,c) || !posDisponible(f+3,c)) {
+					return null;
+				}
+				else {
+					bloques[1]=grilla[f+1][c];
+					bloques[2]=grilla[f+2][c];
+					bloques[3]=grilla[f+3][c];
+				}
+				orientacion=90;
+		}
+	return bloques;
+	}
+	
+	public Bloque[] moverTetriminoIzq() {
+		int f0=bloques[0].obtenerPosEnGrillaX();
+		int c0=bloques[0].obtenerPosEnGrillaY();
+		int f1=bloques[1].obtenerPosEnGrillaX();
+		int c1=bloques[1].obtenerPosEnGrillaY();
+		int f2=bloques[2].obtenerPosEnGrillaX();
+		int c2=bloques[2].obtenerPosEnGrillaY();
+		int f3=bloques[3].obtenerPosEnGrillaX();
+		int c3=bloques[3].obtenerPosEnGrillaY();
+		switch(orientacion) {
+		case 0:{
+			if(!posDisponible(f0,c0-1)) {
+				return null;
+			}
+			break;
+		}
+		case 90:{
+			if(!posDisponible(f0,c0-1) || !posDisponible(f1,c1-1) || !posDisponible(f2,c2-1) || !posDisponible(f3,c3-1)) {
+				return null;
+			}
+			break;
+		}
+		}
+		vaciarBloques();
+		bloques[0]=grilla[f0][c0-1];
+		bloques[1]=grilla[f1][c1-1];
+		bloques[2]=grilla[f2][c2-1];
+		bloques[3]=grilla[f3][c3-1];
+		ocuparBloques();
+		return bloques;
+	}
+
+	public Bloque[] moverTetriminoDer() {
+		int f0=bloques[0].obtenerPosEnGrillaX();
+		int c0=bloques[0].obtenerPosEnGrillaY();
+		int f1=bloques[1].obtenerPosEnGrillaX();
+		int c1=bloques[1].obtenerPosEnGrillaY();
+		int f2=bloques[2].obtenerPosEnGrillaX();
+		int c2=bloques[2].obtenerPosEnGrillaY();
+		int f3=bloques[3].obtenerPosEnGrillaX();
+		int c3=bloques[3].obtenerPosEnGrillaY();
+		switch(orientacion) {
+		case 0:{
+			if(!posDisponible(f3,c3+1)) {
+				return null;
+			}
+			break;
+		}
+		case 90:{
+			if(!posDisponible(f0,c0+1) || !posDisponible(f1,c1+1) || !posDisponible(f2,c2+1) || !posDisponible(f3,c3+1)) {
+				return null;
+			}
+			break;
+		}
+		}
+		vaciarBloques();
+		bloques[0]=grilla[f0][c0+1];
+		bloques[1]=grilla[f1][c1+1];
+		bloques[2]=grilla[f2][c2+1];
+		bloques[3]=grilla[f3][c3+1];
+		ocuparBloques();
+		return bloques;
+	}
 
 }
