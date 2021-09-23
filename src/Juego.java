@@ -11,6 +11,11 @@ public class Juego {
 	protected Reloj miReloj;
 	protected Bloque[][] grilla;
 	
+	public final int MOVER_ABAJO = 0;
+	public final int MOVER_DERECHA = 1;
+	public final int MOVER_IZQUIERDA = 2;
+	public final int ROTAR = 3;
+	
 	public Juego(Reloj r) {
 		puntos = 0;
 		velocidad = 0;
@@ -60,7 +65,16 @@ public class Juego {
 		return tetriminoSig;
 	}
 	
-	public void actualizarPosTetrimino() {
+	public synchronized void operar(int op) {
+		switch(op) {
+			case MOVER_ABAJO: {actualizarPosTetrimino(); break;}
+			case MOVER_DERECHA: {moverTetriminoDer(); break;}
+			case MOVER_IZQUIERDA: {moverTetriminoIzq(); break;}
+			case ROTAR: {rotarTetrimino(); break;}
+		}
+	}
+	
+	private void actualizarPosTetrimino() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.actualizarPos();
@@ -72,7 +86,7 @@ public class Juego {
 		}
 	}
 	
-	public void moverTetriminoIzq() {
+	private void moverTetriminoIzq() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.moverTetriminoIzq();
@@ -84,7 +98,7 @@ public class Juego {
 		}
 	}
 	
-	public void moverTetriminoDer() {
+	private void moverTetriminoDer() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.moverTetriminoDer();
@@ -96,7 +110,7 @@ public class Juego {
 		}
 	}
 	
-	public void rotarTetrimino() { 
+	private void rotarTetrimino() { 
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.rotarTetrimino();
@@ -131,17 +145,14 @@ public class Juego {
 	private Tetrimino randomTetrimino() {
 		Tetrimino t = null;
 		Random random = new Random();
-		switch(random.nextInt(10)){
+		switch(random.nextInt(7)){
 			case 0: t = new TetriminoCuadrado(grilla); break;
-			case 1: t = new TetriminoCuadrado(grilla); break;
-			case 2: t = new TetriminoPodio(grilla); break;
-			case 3: t = new TetriminoSD(grilla); break;
-			case 4: t = new TetriminoPodio(grilla); break;
-			case 5: t = new TetriminoSD(grilla); break;
-			case 6: t = new TetriminoSI(grilla); break;
-			case 7: t = new TetriminoLinea(grilla);break;
-			case 8: t = new TetriminoLI(grilla);break;
-			case 9: t = new TetriminoLD(grilla);break;
+			case 1: t = new TetriminoPodio(grilla); break;
+			case 2: t = new TetriminoSD(grilla); break;
+			case 3: t = new TetriminoSI(grilla); break;
+			case 4: t = new TetriminoLinea(grilla);break;
+			case 5: t = new TetriminoLI(grilla);break;
+			case 6: t = new TetriminoLD(grilla);break;
 		}
 		return t;
 	}

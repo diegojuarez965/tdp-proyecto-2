@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame{
@@ -25,15 +24,15 @@ public class GUI extends JFrame{
 				switch(e.getKeyCode()) {
 				
 				case KeyEvent.VK_RIGHT: {
-					juego.moverTetriminoDer();
+					juego.operar(juego.MOVER_DERECHA);
 					break;
 				} 
 				case KeyEvent.VK_LEFT: {
-					juego.moverTetriminoIzq();
+					juego.operar(juego.MOVER_IZQUIERDA);
 					break;
 				}
 				case KeyEvent.VK_SPACE:{
-					juego.rotarTetrimino();
+					juego.operar(juego.ROTAR);
 					break;
 				}
 			}
@@ -46,7 +45,7 @@ public class GUI extends JFrame{
 		
 		
 		proxTetrimino = new JLabel("");
-		proxTetrimino.setIcon(new ImageIcon(GUI.class.getResource(juego.obtenerTetriminoSig().obtenerIcono())));
+		proxTetrimino.setIcon(new ImageIcon(GUI.class.getResource(this.juego.obtenerTetriminoSig().obtenerIcono())));
 		getContentPane().add(proxTetrimino, "cell 16 2, span 2 2");
 		getContentPane().add(new JLabel("Proximo Tetrimino:"),"cell 16 1");
 		

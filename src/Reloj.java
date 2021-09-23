@@ -19,7 +19,7 @@ public class Reloj implements Runnable{
 			for(int i = velocidad; i>0; i--) {
 				try {
 					Thread.sleep(1000/velocidad);
-					juego.actualizarPosTetrimino();
+					juego.operar(juego.MOVER_ABAJO);
 				} catch (InterruptedException e) {e.printStackTrace();}
 			}
 			tiempoNuevo = System.currentTimeMillis();

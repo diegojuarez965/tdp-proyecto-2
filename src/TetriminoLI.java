@@ -9,7 +9,6 @@ public class TetriminoLI extends Tetrimino{
 		bloques[1]= grilla[1][6];
 		bloques[2]= grilla[1][5];
 		bloques[3]= grilla[1][4];
-		ocuparBloques();
 	}
 
 	public Bloque[] rotarTetrimino() {
