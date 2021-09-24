@@ -10,7 +10,6 @@ public class Launcher {
 		reloj.setJuego(juego);
 		gui.setVisible(true);
 		reloj.run();
-		
 	}
 
 }

@@ -8,7 +8,7 @@ public class Bloque {
 
 		this.posEnGrillaX = posEnGrillaX;
 		this.posEnGrillaY = posEnGrillaY;
-		disponible=true;
+		disponible = true;
 	}
 
 	public int obtenerPosEnGrillaX() {
@@ -26,4 +26,5 @@ public class Bloque {
 	public void actualizarDisponible(boolean disp) {
 		disponible = disp;
 	}
+
 }
