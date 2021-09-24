@@ -159,11 +159,13 @@ public class Juego {
 		for (int filaArriba=fila-1; filaArriba>-1;filaArriba--,fila--) {
 			for (int c=0;c<10;c++) {
 				grilla[fila][c].actualizarDisponible(grilla[filaArriba][c].obtenerDisponible());
+				miGui.eliminarBloque(fila, c);
 			}
 		}
 	}
-	private int sumarPuntos(int filaComp) {
-		return filaComp*100;
+	private void sumarPuntos(int filaComp) {
+		puntos += filaComp*100;
+		miGui.actualizarPuntos(puntos);
 	} 
 	
 	

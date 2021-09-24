@@ -108,4 +108,17 @@ public class GUI extends JFrame{
 		this.setVisible(false);
 		this.dispose();
 	}
+	
+	public void eliminarBloque(int fila, int c) {
+		
+		/*for(int col = 9; col > 0; col--) {
+			labelsTetris[fila][col].setIcon(labelsTetris[fila - 1][col].getIcon());
+			for(int f = fila-1; f > 0; f--) {
+				labelsTetris[f][col].setIcon(labelsTetris[f - 1][col].getIcon());
+			}
+		}*/
+		
+		labelsTetris[fila][c].setIcon(labelsTetris[fila - 1][c].getIcon());
+	}
+	
 }
