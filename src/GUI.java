@@ -15,7 +15,7 @@ public class GUI extends JFrame{
 	private JLabel tiempo;
 	private JLabel puntos;
 	private JLabel proxTetrimino;
-	private JLabel[][] labelsTetris; //Mantiene una matriz de los labels que van a estar cambiando constantemente en el juego. Tiene 21 filas y 10 columnas.
+	private JLabel[][] labelsTetris;
 
 	public GUI(Juego juego) {
 		this.juego = juego;
@@ -104,21 +104,15 @@ public class GUI extends JFrame{
 		return tiempo.getText();
 	}
 	public void finalizar() {
-		JOptionPane.showMessageDialog(this, "          JUEGO TERMINADO\nConseguiste "+juego.obtenerPuntos()+" puntos en "+tiempo.getText());
+		String t = tiempo.getText().substring(0, 2)+"h "+tiempo.getText().substring(3, 5)+"m "+tiempo.getText().substring(6)+"s";
+		JOptionPane.showMessageDialog(getContentPane(), "          JUEGO TERMINADO\nConseguiste "+juego.obtenerPuntos()+" puntos en: "+t);
 		this.setVisible(false);
 		this.dispose();
+		System.exit(0);
 	}
-	
-	public void eliminarBloque(int fila, int c) {
-		
-		/*for(int col = 9; col > 0; col--) {
-			labelsTetris[fila][col].setIcon(labelsTetris[fila - 1][col].getIcon());
-			for(int f = fila-1; f > 0; f--) {
-				labelsTetris[f][col].setIcon(labelsTetris[f - 1][col].getIcon());
-			}
-		}*/
-		
-		labelsTetris[fila][c].setIcon(labelsTetris[fila - 1][c].getIcon());
+	public String obtenerImagenBloque(int x, int y) {
+		String camino = labelsTetris[x][y].getIcon().toString();
+		return "/images/"+camino.substring(camino.lastIndexOf('/')+1);
 	}
 	
 }

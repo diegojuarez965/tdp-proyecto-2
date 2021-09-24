@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Juego {
@@ -15,6 +16,8 @@ public class Juego {
 	public final int MOVER_DERECHA = 1;
 	public final int MOVER_IZQUIERDA = 2;
 	public final int ROTAR = 3;
+	
+	private final String fondoDefault = "/images/FondoNegro.png";
 	
 	public Juego(Reloj r) {
 		puntos = 0;
@@ -79,10 +82,8 @@ public class Juego {
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.actualizarPos();
 		if(bloquesNuevos!=null) {
-			for(int i = 0; i<4; i++) 
-				miGui.actualizarBloque(bloquesViejos[i].obtenerPosEnGrillaX(), bloquesViejos[i].obtenerPosEnGrillaY(), "\\images\\FondoNegro.png");
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesNuevos[i].obtenerPosEnGrillaX(), bloquesNuevos[i].obtenerPosEnGrillaY(), tetriminoActivo.obtenerColor());
+			actualizarBloques(bloquesViejos, fondoDefault);
+			actualizarBloques(bloquesNuevos, tetriminoActivo.obtenerColor());
 		}
 		else {
 			chequearFinJuego();
@@ -98,10 +99,8 @@ public class Juego {
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.moverTetriminoIzq();
 		if(bloquesNuevos!=null) {
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesViejos[i].obtenerPosEnGrillaX(), bloquesViejos[i].obtenerPosEnGrillaY(), "\\images\\FondoNegro.png");
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesNuevos[i].obtenerPosEnGrillaX(), bloquesNuevos[i].obtenerPosEnGrillaY(), tetriminoActivo.obtenerColor());
+			actualizarBloques(bloquesViejos, fondoDefault);
+			actualizarBloques(bloquesNuevos, tetriminoActivo.obtenerColor());
 		}
 	}
 	
@@ -110,10 +109,8 @@ public class Juego {
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.moverTetriminoDer();
 		if(bloquesNuevos!=null) {
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesViejos[i].obtenerPosEnGrillaX(), bloquesViejos[i].obtenerPosEnGrillaY(), "\\images\\FondoNegro.png");
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesNuevos[i].obtenerPosEnGrillaX(), bloquesNuevos[i].obtenerPosEnGrillaY(), tetriminoActivo.obtenerColor());
+			actualizarBloques(bloquesViejos, fondoDefault);
+			actualizarBloques(bloquesNuevos, tetriminoActivo.obtenerColor());
 		}
 	}
 	
@@ -122,35 +119,39 @@ public class Juego {
 		Bloque[] bloquesViejos = {bloquesT[0],bloquesT[1],bloquesT[2],bloquesT[3]};
 		Bloque[] bloquesNuevos = tetriminoActivo.rotarTetrimino();
 		if(bloquesNuevos!=null) {
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesViejos[i].obtenerPosEnGrillaX(), bloquesViejos[i].obtenerPosEnGrillaY(), "\\images\\FondoNegro.png");
-			for(int i = 0; i<4; i++)
-				miGui.actualizarBloque(bloquesNuevos[i].obtenerPosEnGrillaX(), bloquesNuevos[i].obtenerPosEnGrillaY(), tetriminoActivo.obtenerColor());
+			actualizarBloques(bloquesViejos, fondoDefault);
+			actualizarBloques(bloquesNuevos, tetriminoActivo.obtenerColor());
 		}
 	}
 	
+	private void actualizarBloques(Bloque[] bloques, String imagen) {
+		for(Bloque b : bloques)
+			miGui.actualizarBloque(b.obtenerPosEnGrillaX(), b.obtenerPosEnGrillaY(), imagen);
+	}
 
 	
 	public void eliminarFila() {
 		int cont=0;
 		Bloque[] bloques=tetriminoActivo.obtenerBloques();
+		LinkedList<Integer> filas = new LinkedList<Integer>();
 		for (int i=0; i<4;i++) {
 			int f=bloques[i].obtenerPosEnGrillaX();
 			boolean filaCompleta=true;
 			int c=0;
-			while(filaCompleta && c<10) {
-				if(grilla[f][c].disponible) {
+			while(filaCompleta && c<10) 
+				if(grilla[f][c].disponible) 
 					filaCompleta=false;
-				}
-				else {
+				else 
 					c++;
-				}
-			}
 			if(filaCompleta) {
 				cont++;
-				reacomodarFila(f);
+				if(!filas.contains(f))
+					filas.add(f);
 			}
 		}
+		filas.sort(null);
+		for(int i : filas)
+			reacomodarFila(i);
 		sumarPuntos(cont);
 	} 
 	
@@ -159,12 +160,21 @@ public class Juego {
 		for (int filaArriba=fila-1; filaArriba>-1;filaArriba--,fila--) {
 			for (int c=0;c<10;c++) {
 				grilla[fila][c].actualizarDisponible(grilla[filaArriba][c].obtenerDisponible());
-				miGui.eliminarBloque(fila, c);
+				grilla[filaArriba][c].actualizarDisponible(true);
+				miGui.actualizarBloque(fila, c, miGui.obtenerImagenBloque(filaArriba, c));
+				miGui.actualizarBloque(filaArriba, c, fondoDefault);
 			}
 		}
 	}
 	private void sumarPuntos(int filaComp) {
-		puntos += filaComp*100;
+		int puntosSumar = 0;
+		switch(filaComp) {
+			case 1: {puntosSumar = 100; break;}
+			case 2: {puntosSumar = 200; break;}
+			case 3: {puntosSumar = 500; break;}
+			case 4: {puntosSumar = 800; break;}
+		}
+		puntos += puntosSumar;
 		miGui.actualizarPuntos(puntos);
 	} 
 	
@@ -173,12 +183,11 @@ public class Juego {
 		int c=0;
 		boolean termino=false;
 		while(!termino && c<10) {
-			if(!grilla[0][c].obtenerDisponible()) {
+			if(!grilla[0][c].obtenerDisponible()) 
 				termino=true;
-			}
 			c++;
 		}
-		if(termino==true)
+		if(termino)
 			finalizarJuego();
 	}
 	
@@ -200,7 +209,7 @@ public class Juego {
 	private Tetrimino randomTetrimino() {
 		Tetrimino t = null;
 		Random random = new Random();
-		switch(random.nextInt(7)){
+		switch(random.nextInt(6)){
 			case 0: t = new TetriminoCuadrado(grilla); break;
 			case 1: t = new TetriminoPodio(grilla); break;
 			case 2: t = new TetriminoSD(grilla); break;

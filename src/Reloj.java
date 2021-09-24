@@ -3,10 +3,12 @@ public class Reloj implements Runnable{
 	
 	private Juego juego;
 	private boolean perdio;
+	private int intervaloIncrementoVelocidad;
 	
 	public Reloj() {
 		juego = null;
 		perdio = false;
+		intervaloIncrementoVelocidad = 20;
 	}
 	
 	@Override
@@ -25,7 +27,7 @@ public class Reloj implements Runnable{
 			tiempoNuevo = System.currentTimeMillis();
 			tiempoTranscurrido = tiempoNuevo-tiempoViejo;
 			juego.aumentarTiempo(tiempoTranscurrido/1000);
-			if((tiempoTranscurrido/1000)%20==0) //Se aumenta la velocidad cada 20s
+			if((tiempoTranscurrido/1000)%intervaloIncrementoVelocidad==0)
 				juego.aumentarVelocidad();
 		}
 	}
@@ -35,5 +37,11 @@ public class Reloj implements Runnable{
 	}
 	public void parar() {
 		perdio = true;
+	}
+	public void setIncrementoVel(int v) {
+		intervaloIncrementoVelocidad = v;
+	}
+	public int getIncrementoVel() {
+		return intervaloIncrementoVelocidad;
 	}
 }
