@@ -104,7 +104,7 @@ public class GUI extends JFrame {
 
 	public void finalizar() {
 		String t = tiempo.getText().substring(0, 2) + "h " + tiempo.getText().substring(3, 5) + "m "
-				+ tiempo.getText().substring(6) + "s";
+				+ tiempo.getText().substring(6, 8) + "s";
 		JOptionPane.showMessageDialog(getContentPane(),
 				"          JUEGO TERMINADO\nConseguiste " + juego.obtenerPuntos() + " puntos en: " + t);
 		this.setVisible(false);

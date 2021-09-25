@@ -136,14 +136,16 @@ public class Juego {
 				else
 					c++;
 			if (filaCompleta) {
-				cont++;
-				if (!filas.contains(f))
+				if (!filas.contains(f)) {
 					filas.add(f);
+					cont++;
+				}
 			}
 		}
 		filas.sort(null);
-		for (int i : filas)
+		for (int i : filas) {
 			reacomodarFila(i);
+		}
 		sumarPuntos(cont);
 	}
 
