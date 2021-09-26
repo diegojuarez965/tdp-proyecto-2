@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
@@ -17,6 +18,8 @@ public class GUI extends JFrame {
 	private JLabel[][] labelsTetris;
 
 	public GUI(Juego juego) {
+		setTitle("Tetris");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/images/TetriminoPodio.png")));
 		this.juego = juego;
 		addKeyListener(new KeyAdapter() {
 			@Override
@@ -44,6 +47,7 @@ public class GUI extends JFrame {
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(450, 591));
+		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(new MigLayout("insets 0", "[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[][][][]0[]0",
 				"[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[]0"));

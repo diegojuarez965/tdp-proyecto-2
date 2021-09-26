@@ -10,10 +10,10 @@ public class Juego {
 	protected GUI miGui;
 	protected Reloj miReloj;
 	protected Bloque[][] grilla;
-	protected final int MOVER_ABAJO = 0;
-	protected final int MOVER_DERECHA = 1;
-	protected final int MOVER_IZQUIERDA = 2;
-	protected final int ROTAR = 3;
+	public final int MOVER_ABAJO = 0;
+	public final int MOVER_DERECHA = 1;
+	public final int MOVER_IZQUIERDA = 2;
+	public final int ROTAR = 3;
 	protected final String fondoDefault = "/images/FondoNegro.png";
 
 	public Juego(Reloj r) {
@@ -71,7 +71,7 @@ public class Juego {
 		}
 	}
 
-	public void actualizarPosTetrimino() {
+	private void actualizarPosTetrimino() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = { bloquesT[0], bloquesT[1], bloquesT[2], bloquesT[3] };
 		Bloque[] bloquesNuevos = tetriminoActivo.actualizarPos();
@@ -87,7 +87,7 @@ public class Juego {
 		}
 	}
 
-	public void moverTetriminoIzq() {
+	private void moverTetriminoIzq() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = { bloquesT[0], bloquesT[1], bloquesT[2], bloquesT[3] };
 		Bloque[] bloquesNuevos = tetriminoActivo.moverTetriminoIzq();
@@ -97,7 +97,7 @@ public class Juego {
 		}
 	}
 
-	public void moverTetriminoDer() {
+	private void moverTetriminoDer() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = { bloquesT[0], bloquesT[1], bloquesT[2], bloquesT[3] };
 		Bloque[] bloquesNuevos = tetriminoActivo.moverTetriminoDer();
@@ -107,7 +107,7 @@ public class Juego {
 		}
 	}
 
-	public void rotarTetrimino() {
+	private void rotarTetrimino() {
 		Bloque[] bloquesT = tetriminoActivo.obtenerBloques();
 		Bloque[] bloquesViejos = { bloquesT[0], bloquesT[1], bloquesT[2], bloquesT[3] };
 		Bloque[] bloquesNuevos = tetriminoActivo.rotarTetrimino();
@@ -196,7 +196,7 @@ public class Juego {
 			finalizarJuego();
 	}
 
-	public void finalizarJuego() {
+	private void finalizarJuego() {
 		miReloj.parar();
 		miGui.finalizar();
 	}
